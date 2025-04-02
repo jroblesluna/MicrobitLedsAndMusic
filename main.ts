@@ -7,9 +7,9 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     music.play(music.builtInPlayableMelody(Melodies.Prelude), music.PlaybackMode.InBackground)
 })
-basic.showIcon(IconNames.Asleep)
 pins.setAudioPin(DigitalPin.P16)
 music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
+basic.showIcon(IconNames.Asleep)
 for (let index = 0; index <= 128; index++) {
     pins.analogWritePin(AnalogPin.P0, index * 8 - 1)
     basic.pause(5)
@@ -33,20 +33,19 @@ basic.forever(function () {
         pins.analogWritePin(AnalogPin.P0, randint(0, 1023))
         pins.analogWritePin(AnalogPin.P1, randint(0, 1023))
         pins.analogWritePin(AnalogPin.P2, randint(0, 1023))
+        pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(100)
-    } else {
-        pins.digitalWritePin(DigitalPin.P0, 0)
-        pins.digitalWritePin(DigitalPin.P1, 0)
-        pins.digitalWritePin(DigitalPin.P2, 0)
-    }
-    if (input.buttonIsPressed(Button.B)) {
+    } else if (input.buttonIsPressed(Button.B)) {
         pins.analogWritePin(AnalogPin.P0, randint(0, 1023))
         pins.analogWritePin(AnalogPin.P1, randint(0, 1023))
         pins.analogWritePin(AnalogPin.P2, randint(0, 1023))
+        pins.digitalWritePin(DigitalPin.P9, 1)
         basic.pause(200)
     } else {
         pins.digitalWritePin(DigitalPin.P0, 0)
         pins.digitalWritePin(DigitalPin.P1, 0)
         pins.digitalWritePin(DigitalPin.P2, 0)
+        pins.digitalWritePin(DigitalPin.P8, 0)
+        pins.digitalWritePin(DigitalPin.P9, 0)
     }
 })
